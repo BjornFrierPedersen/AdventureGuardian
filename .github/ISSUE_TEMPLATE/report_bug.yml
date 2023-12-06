@@ -50,17 +50,7 @@ body:
       placeholder: Tell us what else happened!
       value: "Tell us what else happened"
     validations:
-      required: false
-  - type: dropdown
-    id: Projects
-    attributes:
-      label: What projects are you seeing the problem in?
-      multiple: true
-      options:
-        - Uge 1
-        - Uge 2
-        - Uge 3
-        - School Application
+      required: false  
   - type: textarea
     id: logs
     attributes:
