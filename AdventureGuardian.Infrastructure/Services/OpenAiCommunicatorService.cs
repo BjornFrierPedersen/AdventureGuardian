@@ -8,7 +8,9 @@ namespace AdventureGuardian.Infrastructure.Services;
 
 public class OpenAiCommunicatorService : IOpenAiCommunicatorService
 {
-    private const string OpenaiApiKey = "sk-br6m65W6GRE4G654REG564RE56G46ER51G61GR5G";
+    private static readonly string OpenaiApiKey = Environment.GetEnvironmentVariable("openai_apikey", EnvironmentVariableTarget.User) ??
+                                                   throw new ApplicationException("OpenAI API Key not found");
+    
     public string ActiveLanguagemodel { get; private set; }
 
     private string[] LanguageModels => new[]
