@@ -1,0 +1,38 @@
+namespace AdventureGuardian.Models.Models.Enums;
+
+public enum Races
+{
+    Menneske,
+    Nordling,
+    Østling,
+    Vestling,
+    Sydling,
+    Dværg,
+    Elver,
+    Halvelver,
+    Hobbit,
+    Ork,
+    Goblin,
+    Trold,
+    Ogre,
+    Kæmpe,
+    Drage,
+    Dæmon,
+    Engel,
+    Cyborg,
+    Klingon,
+    Vulcan,
+    Wookiee,
+    Hutt,
+    Trill,
+    Bajoran,
+    Cardassian,
+    Ferengi,
+    Betazoid,
+    Saiyan,
+    Zabrak,
+    Twilek,
+    Togruta,
+    Navi,
+    Gungan
+}

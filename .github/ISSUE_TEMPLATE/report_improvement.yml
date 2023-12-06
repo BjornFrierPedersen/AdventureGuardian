@@ -1,0 +1,56 @@
+name: Improvement Report
+description: Request an improvement report
+title: "[Improvement] "
+labels: ["enhancement"]
+projects: ["octo-org/1", "octo-org/44"]
+assignees:
+  - octocat
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this improvement request!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Input you improvement request in the form of a user story
+      placeholder: Tell us what you want!
+      value: "As a [user] I want to be able to [action]. This will help us to [improvement]"
+    validations:
+      required: true  
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: What type of issue are you reporting?
+      options:
+        - Feature Request
+        - Enhancement
+        - Question
+        - Other
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://drive.google.com/file/d/1DjoAyHsC1Pn79AfilE8WA1sKC7kVMjvl/view?usp=drive_link)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

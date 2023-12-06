@@ -1,0 +1,67 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug] "
+labels: ["bug","triage"]
+projects: ["octo-org/1", "octo-org/44"]
+assignees:
+  - octocat
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Be as detailed as possible
+      placeholder: Tell us what you saw!
+      value: "Tell us what you saw"
+    validations:
+      required: true
+  - type: textarea
+    id: expected-action
+    attributes:
+      label: What did you expect to happen?
+      placeholder: Tell us what you wanted to see!
+      value: "Tell us what you wanted to see"
+    validations:
+      required: true
+  - type: textarea
+    id: actual-action
+    attributes:
+      label: What actually happened?
+      placeholder: Tell us what actually happened!
+      value: "Tell us what actually happened"
+    validations:
+      required: true
+  - type: textarea
+    id: more-info
+    attributes:
+      label: Anything else?
+      placeholder: Tell us what else happened!
+      value: "Tell us what else happened"
+    validations:
+      required: false
+ - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://drive.google.com/file/d/1DjoAyHsC1Pn79AfilE8WA1sKC7kVMjvl/view?usp=drive_link)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

@@ -1,0 +1,14 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=035d73f3_002D1647_002D4dd7_002D9d19_002D820e35fd4baa/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6dfacc97_002Da6a0_002D4baa_002D85b9_002D7c41f0844658/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Generating_world_for_group_consisting_of_individuals_in_same_age_group_should_filter_out_explicit_content" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::49A26C8C-EEEE-43C4-95B5-4209B06820A3::net7.0::AdventureGuardian.Test.CampaignTests.When_creating_a_new_campaign_with_valid_parameters_it_should_be_created&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::49A26C8C-EEEE-43C4-95B5-4209B06820A3::net7.0::AdventureGuardian.Test.OpenAiCommunicatorServiceTest.Get_active_language_model_from_open_ai&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::49A26C8C-EEEE-43C4-95B5-4209B06820A3::net7.0::AdventureGuardian.Test.CampaignTests.When_creating_a_new_campaign_with_invalid_parameters_it_should_not_be_created&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::49A26C8C-EEEE-43C4-95B5-4209B06820A3::net7.0::AdventureGuardian.Test.CampaignTests.When_creating_a_new_campaign_with_invalid_parameters_it_should_throw_exception&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::49A26C8C-EEEE-43C4-95B5-4209B06820A3::net7.0::AdventureGuardian.Test.CampaignTests.When_editing_an_existing_campaign_with_valid_parameters_it_should_update_the_campaign&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>
