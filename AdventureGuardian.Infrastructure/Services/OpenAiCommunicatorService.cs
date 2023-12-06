@@ -8,7 +8,7 @@ namespace AdventureGuardian.Infrastructure.Services;
 
 public class OpenAiCommunicatorService : IOpenAiCommunicatorService
 {
-    private const string OpenaiApiKey = "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";
+    private const string OpenaiApiKey = "sk-br6m65W6GRE4G654REG564RE56G46ER51G61GR5G";
     public string ActiveLanguagemodel { get; private set; }
 
     private string[] LanguageModels => new[]
