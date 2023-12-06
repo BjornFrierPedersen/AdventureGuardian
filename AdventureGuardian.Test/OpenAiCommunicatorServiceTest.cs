@@ -6,7 +6,7 @@ namespace AdventureGuardian.Test;
 
 public class OpenAiCommunicatorServiceTest
 {
-    [Fact]
+    [Fact(Skip = "until I have implemented storage of the api-key in github secrets")]
     public void Assert_active_language_model_from_open_ai_is_initialized()
     {
         // Arrange
