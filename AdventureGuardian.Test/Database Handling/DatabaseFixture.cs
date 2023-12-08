@@ -16,7 +16,7 @@ public class DatabaseFixture : IDisposable
         AdventureGuardianDbContext.Database.EnsureCreated();
 
         // We clear the data from the previously run test
-        Builder.CleanDatabase();
+        Builder.CleanDatabaseAsync();
 
         // And create the seed data to prepare for out own tests
         //Builder.SeedDefaultData();

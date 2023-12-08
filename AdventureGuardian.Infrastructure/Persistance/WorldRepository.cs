@@ -1,35 +1,32 @@
 using AdventureGuardian.Models.Models.Worlds;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdventureGuardian.Infrastructure.Persistance;
 
 public class WorldRepository
 {
-    public World CreateWorld(World world)
+    private readonly AdventureGuardianDbContext _dbContext;
+
+    public WorldRepository(AdventureGuardianDbContext dbContext)
     {
-        using var dbContext = new AdventureGuardianDbContext();
-        dbContext.Worlds.Add(world);
-        dbContext.SaveChanges();
-        return world;
+        _dbContext = dbContext;
     }
 
-    public void DeleteWorld(World world)
+    public async Task DeleteWorldAsync(World world, CancellationToken cancellationToken)
     {
-        using var dbContext = new AdventureGuardianDbContext();
-        dbContext.Worlds.Remove(world);
-        dbContext.SaveChanges();
+        _dbContext.Worlds.Remove(world);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public void UpdateWorld(World world)
+    public async Task UpdateWorldAsync(World world, CancellationToken cancellationToken)
     {
-        using var dbContext = new AdventureGuardianDbContext();
-        dbContext.Worlds.Update(world);
-        dbContext.SaveChanges();
+        _dbContext.Worlds.Update(world);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public World GetWorldById(int id)
+    public async Task<World> GetWorldByIdAsync(int id, CancellationToken cancellationToken)
     {
-        using var dbContext = new AdventureGuardianDbContext();
-        var world = dbContext.Worlds.FirstOrDefault(world => world.Id.Equals(id));
+        var world = await _dbContext.Worlds.FirstOrDefaultAsync(world => world.Id.Equals(id), cancellationToken: cancellationToken);
         if (world is null) throw new ApplicationException("World not found");
         return world;
     }

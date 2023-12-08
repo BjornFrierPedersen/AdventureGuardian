@@ -1,17 +1,17 @@
 namespace AdventureGuardian.Models.Models.ClassModels;
 
-public class Viking : Class
+public class Troldmand : Class
 {
-    public override Enums.Classes ClassType => Enums.Classes.Viking;
+    public override Enums.Classes ClassType => Enums.Classes.Troldmand;
 
     public override Stats BaseStats { get; } = new()
     {
-        Strength = 4,
-        Charisma = 2,
-        Constitution = 5,
+        Strength = 2,
+        Charisma = 3,
+        Constitution = 2,
         Dexterity = 4,
-        Intelligence = 2,
-        Wisdom = 3
+        Intelligence = 5,
+        Wisdom = 4
     };
 
     public override int HitpointClassBonus => BaseStats.Constitution;

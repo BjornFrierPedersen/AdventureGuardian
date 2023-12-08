@@ -1,27 +1,28 @@
 using AdventureGuardian.Infrastructure.Persistance;
 using AdventureGuardian.Infrastructure.Services.Domain;
 using AdventureGuardian.Models.Models;
-using AdventureGuardian.Models.Models.ClassModels;
 using AdventureGuardian.Models.Models.Enums;
-using AdventureGuardian.Models.Models.RaceModels;
 using AdventureGuardian.Models.Models.Worlds;
 using AdventureGuardian.Test.Stubs;
 using Microsoft.EntityFrameworkCore;
-using TinyHeroesRp.Services.Domain;
 
 namespace AdventureGuardian.Test.Database_Handling;
 
 public class TestDataBuilder
 {
     private readonly AdventureGuardianDbContext _dbContext;
-    private readonly Repository _repository = new();
+    private readonly Repository _repository;
     public readonly CampaignService CampaignService;
+    public readonly CharacterService CharacterService;
+    public readonly EncounterService EncounterService;
 
     public TestDataBuilder(AdventureGuardianDbContext dbContext)
     {
         _dbContext = dbContext;
-        CampaignService =
-            new CampaignService(new TestOpenAiCommunicatorService(), new CampaignRepository(dbContext));
+        _repository = new Repository(dbContext);
+        CharacterService = new CharacterService(new TestOpenAiCommunicatorService(), new CharacterRepository(dbContext));
+        CampaignService = new CampaignService(new TestOpenAiCommunicatorService(), new CampaignRepository(dbContext));
+        EncounterService = new EncounterService(new TestOpenAiCommunicatorService());
     }
 
     public IQueryable<Campaign> Campaigns => _dbContext.Campaigns
@@ -30,9 +31,9 @@ public class TestDataBuilder
         .Include(campaign => campaign.Characters);
 
 
-    public void CleanDatabase()
+    public async Task CleanDatabaseAsync()
     {
-        _repository.CleanDatabase();
+        await _repository.CleanDatabase(CancellationToken.None);
     }
 
     public void SeedDefaultData()
@@ -45,11 +46,10 @@ public class TestDataBuilder
 
     public TestDataBuilder WithCampaign(out int campaignId, (Gender gender, int age)[]? playersByGenderAndAge = null)
     {
-        campaignId = CampaignService
-            .CreateCampaignAsync("MyTestCampaignName", "Test world",
+        campaignId = CampaignService.CreateCampaignAsync("MyTestCampaignName", "Test world",
                 playersByGenderAndAge ?? new[] { (Gender.Kvinde, 4), (Gender.Mand, 5), (Gender.Mand, 7) },
                 World.WorldType.Fantasy,
-                false).Result.Id;
+                false, CancellationToken.None).Result.Id;
         return this;
     }
 

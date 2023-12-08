@@ -2,7 +2,6 @@ using OpenAI;
 using OpenAI.Managers;
 using OpenAI.ObjectModels.RequestModels;
 using OpenAI.ObjectModels.ResponseModels;
-using TinyHeroesRp.Services;
 
 namespace AdventureGuardian.Infrastructure.Services;
 

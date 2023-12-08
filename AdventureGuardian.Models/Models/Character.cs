@@ -21,6 +21,18 @@ public class Character
     [NotMapped] public int MaxHitPoints => BaseHitpoints + BonusHitPoints;
     public int HitPoints { get; set; }
     private int BaseHitpoints => Race.BaseHitPoints + Class.HitpointClassBonus;
+    
+    public string Prompt(string[]? keywords)
+    {
+        var keywordsPrompt = keywords != null
+            ? $" Brug følgende nøgleord til at lave baggrundshistorien: {string.Join(", ", keywords)}"
+            : string.Empty;
+
+        return
+            $"Lav en baggrundshistorie til en karakter ved navn {Name}. " +
+            $"Karakteren er en {Gender} af racen {RaceType}, har klassen {ClassType} og er på level {Level}." +
+            $"{keywordsPrompt}";
+    }
 
     /// <summary>
     /// Used for tracking the bonus stats from items, spells, etc.

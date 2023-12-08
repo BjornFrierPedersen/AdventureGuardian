@@ -4,16 +4,21 @@ namespace AdventureGuardian.Infrastructure.Persistance;
 
 public class Repository
 {
+    private readonly AdventureGuardianDbContext _dbContext;
+    public Repository(AdventureGuardianDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+    
     public void MigrateDatabase()
     {
-        using var dbContext = new AdventureGuardianDbContext();
-        dbContext.Database.Migrate();
+        _dbContext.Database.Migrate();
     }
 
-    public void CleanDatabase()
+    public async Task CleanDatabase(CancellationToken cancellationToken)
     {
-        using var dbContext = new AdventureGuardianDbContext();
-        dbContext.Database.ExecuteSqlRaw(
-            "TRUNCATE \"Campaigns\",\"Worlds\",\"Encounters\",\"Stats\",\"Characters\" RESTART IDENTITY CASCADE");
+        await _dbContext.Database.ExecuteSqlRawAsync(
+            "TRUNCATE \"Campaigns\",\"Worlds\",\"Encounters\",\"Stats\",\"Characters\" RESTART IDENTITY CASCADE", cancellationToken: cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

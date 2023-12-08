@@ -26,7 +26,8 @@ public class Campaign
             Name = name,
             CharacterIds = Characters.Select(character => character.Id).ToList(),
             Creatures = creatures?.ToList() ?? World.Creatures.OrderBy(_ => Guid.NewGuid()).Take(2).ToList(),
-            CampaignId = Id
+            CampaignId = Id,
+            Campaign = this
         };
 
         return encounter;

@@ -1,17 +1,13 @@
-using AdventureGuardian.Models.Models;
+using AdventureGuardian.Infrastructure.Services.Domain;
 using AdventureGuardian.Models.Models.Worlds;
 using AdventureGuardian.Test.Stubs;
 using FluentAssertions;
-using TinyHeroesRp.Services.Domain;
 using Xunit;
 
 namespace AdventureGuardian.Test;
 
 public class WorldServiceTest
 {
-    private readonly WorldService _worldService = new(new TestOpenAiCommunicatorService());
-
-
     [Theory]
     [InlineData(World.WorldType.SciFi, new[] { 8, 9, 11 }, true, false)]
     [InlineData(World.WorldType.Fantasy, new[] { 12, 13, 15 }, false, false)]

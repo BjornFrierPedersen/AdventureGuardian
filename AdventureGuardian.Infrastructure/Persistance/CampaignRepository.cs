@@ -20,28 +20,27 @@ public class CampaignRepository
             .Include(campaign => campaign.Characters);
     }
 
-    public Campaign CreateCampaign(Campaign campaign)
+    public async Task CreateCampaignAsync(Campaign campaign, CancellationToken cancellationToken)
     {
-        _dbContext.Campaigns.Add(campaign);
-        _dbContext.SaveChanges();
-        return campaign;
+        await _dbContext.Campaigns.AddAsync(campaign, cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public void DeleteCampaign(Campaign campaign)
+    public async Task DeleteCampaignAsync(Campaign campaign, CancellationToken cancellationToken)
     {
         _dbContext.Campaigns.Remove(campaign);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public void UpdateCampaign(Campaign campaign)
+    public async Task UpdateCampaignAsync(Campaign campaign, CancellationToken cancellationToken)
     {
         _dbContext.Campaigns.Update(campaign);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public Campaign GetCampaignById(int id)
+    public async Task<Campaign> GetCampaignByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var campaign = _dbContext.Campaigns.FirstOrDefault(campaign => campaign.Id.Equals(id));
+        var campaign = await _dbContext.Campaigns.FirstOrDefaultAsync(campaign => campaign.Id.Equals(id), cancellationToken: cancellationToken);
         if (campaign is null) throw new ApplicationException("Campaign not found");
         return campaign;
     }

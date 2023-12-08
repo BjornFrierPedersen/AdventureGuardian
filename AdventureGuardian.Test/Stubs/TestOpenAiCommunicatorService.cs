@@ -1,4 +1,4 @@
-using TinyHeroesRp.Services;
+using AdventureGuardian.Infrastructure.Services;
 
 namespace AdventureGuardian.Test.Stubs;
 

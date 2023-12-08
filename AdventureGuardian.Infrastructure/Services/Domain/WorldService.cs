@@ -1,7 +1,6 @@
-using AdventureGuardian.Models.Models;
 using AdventureGuardian.Models.Models.Worlds;
 
-namespace TinyHeroesRp.Services.Domain;
+namespace AdventureGuardian.Infrastructure.Services.Domain;
 
 public class WorldService
 {

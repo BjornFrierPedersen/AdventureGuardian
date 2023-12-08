@@ -4,27 +4,23 @@ using AdventureGuardian.Models.Models.ClassModels;
 using AdventureGuardian.Models.Models.Enums;
 using AdventureGuardian.Models.Models.RaceModels;
 using AdventureGuardian.Models.Models.Worlds;
-using TinyHeroesRp.Services;
-using TinyHeroesRp.Services.Domain;
 
 namespace AdventureGuardian.Infrastructure.Services.Domain;
 
 public class CampaignService
 {
-    private readonly IOpenAiCommunicatorService _openAiCommunicatorService;
     private readonly WorldService _worldService;
     private readonly CampaignRepository _repository;
 
     public CampaignService(IOpenAiCommunicatorService openAiCommunicatorService, CampaignRepository repository)
     {
-        _openAiCommunicatorService = openAiCommunicatorService;
         _repository = repository;
         _worldService = new WorldService(openAiCommunicatorService);
     }
 
     public async Task<Campaign> CreateCampaignAsync(string campaignName, string worldName,
         (Gender sex, int age)[] playersByAge,
-        World.WorldType worldType, bool displayExplicitContent, string[]? keywords = null)
+        World.WorldType worldType, bool displayExplicitContent, CancellationToken cancellationToken, string[]? keywords = null)
     {
         var world = await _worldService.GenerateWorldAsync(worldName, playersByAge.Select(_ => _.age).ToArray(),
             worldType, displayExplicitContent, keywords);
@@ -37,19 +33,19 @@ public class CampaignService
                 Name = player.sex == Gender.Mand ? "Hr. Danmark" :
                     player.sex == Gender.Kvinde ? "Fru Danmark" : "Hen Danmark",
                 Gender = player.sex,
-                Race = new Human(),
+                Race = new Menneske(),
                 Class = new Bonde()
             }).ToList()
         };
 
-        _repository.CreateCampaign(campaign);
+        await _repository.CreateCampaignAsync(campaign, cancellationToken);
 
         return campaign;
     }
 
-    public Campaign GetCampaign(int id)
+    public async Task<Campaign> GetCampaignAsync(int id, CancellationToken cancellationToken)
     {
-        return _repository.GetCampaignById(id);
+        return await _repository.GetCampaignByIdAsync(id, cancellationToken);
     }
 
     public void DeleteCampaign(Campaign campaign)
@@ -57,20 +53,8 @@ public class CampaignService
         //Campaigns.Remove(campaign);
     }
 
-    public Campaign UpdateCampaign(Campaign campaign)
+    public async Task UpdateCampaignAsync(Campaign campaign, CancellationToken cancellationToken)
     {
-        _repository.UpdateCampaign(campaign);
-        return campaign;
-    }
-
-
-    public async Task<Encounter> GenerateEncounterAsync(string name, Campaign campaign,
-        List<Character>? characters = null, Creatures[]? creatures = null)
-    {
-        var encounter = campaign.CreateEncounter(name, creatures);
-        var encounterDescription = await _openAiCommunicatorService.SendRequestAsync(encounter.Prompt(characters));
-        encounter.Description = encounterDescription;
-        campaign.Encounters.Add(encounter);
-        return encounter;
+        await _repository.UpdateCampaignAsync(campaign, cancellationToken);
     }
 }

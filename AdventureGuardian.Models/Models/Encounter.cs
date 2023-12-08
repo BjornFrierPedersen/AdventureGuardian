@@ -30,6 +30,6 @@ public class Encounter
 
         return
             $"Til brug i PnP kampagne - Lav et encounter mod disse væsner: {sortedCreatures} for karakterer i levels: {sortedCharacterLevels}. " +
-            $"Inkluder base stats for væsnerne, samt deres angreb og forsvar.";
+            $"Inkluder base stats for væsnerne, deres angreb og forsvar samt en indledning til encounter.";
     }
 }

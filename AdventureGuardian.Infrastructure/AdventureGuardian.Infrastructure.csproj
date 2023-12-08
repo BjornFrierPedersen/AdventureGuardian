@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AdventureGuardian.Models\AdventureGuardian.Models.csproj"/>
+        <ProjectReference Include="..\AdventureGuardian.Models\AdventureGuardian.Models.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Betalgo.OpenAI" Version="7.4.1"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14"/>
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11"/>
+        <PackageReference Include="Betalgo.OpenAI" Version="7.4.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-namespace TinyHeroesRp.Services;
+namespace AdventureGuardian.Infrastructure.Services;
 
 public interface IOpenAiCommunicatorService
 {
