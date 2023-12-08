@@ -49,11 +49,11 @@ public class CharacterTests
         var campaign = testContext.Campaigns.First(c => c.Id.Equals(campaignId));
         var character = campaign.Characters.First();
         var oldBackgroundStory = character.BackgroundStory;
-        await _characterService.GenerateCharacterBackstoryAsync(character, new[] {"test"});
         // Act
+        await _characterService.GenerateCharacterBackstoryAsync(character, new[] {"test"});
         await _characterService.UpdateCharacterAsync(character, CancellationToken.None);
-        var newBackgroundStory = testContext.Campaigns.First().Characters.First().BackgroundStory;
         // Assert
+        var newBackgroundStory = testContext.Campaigns.First().Characters.First().BackgroundStory;
         newBackgroundStory.Should().NotBeSameAs(oldBackgroundStory);
     }
     
