@@ -11,11 +11,10 @@ public class CharacterService : BaseAiGenerationService
         _repository = repository;
     }
     
-    public async Task<Character> GenerateCharacterBackstoryAsync(Character character, string[]? keywords = null)
+    public async Task GenerateCharacterBackstoryAsync(Character character, string[]? keywords = null)
     {
         var characterBackstroy = await OpenAiCommunicatorService.SendRequestAsync(character.Prompt(keywords));
         character.BackgroundStory = characterBackstroy;
-        return character;
     }
 
     public async Task UpdateCharacterAsync(Character character, CancellationToken cancellationToken)

@@ -11,6 +11,7 @@ namespace AdventureGuardian.Test.Database_Handling;
 public class TestDataBuilder
 {
     private readonly AdventureGuardianDbContext _dbContext;
+    private readonly TestOpenAiCommunicatorService _openAiCommunicatorService = new();
     private readonly Repository _repository;
     public readonly CampaignService CampaignService;
     public readonly CharacterService CharacterService;
@@ -20,9 +21,9 @@ public class TestDataBuilder
     {
         _dbContext = dbContext;
         _repository = new Repository(dbContext);
-        CharacterService = new CharacterService(new TestOpenAiCommunicatorService(), new CharacterRepository(dbContext));
-        CampaignService = new CampaignService(new TestOpenAiCommunicatorService(), new CampaignRepository(dbContext));
-        EncounterService = new EncounterService(new TestOpenAiCommunicatorService());
+        CharacterService = new CharacterService(_openAiCommunicatorService, new CharacterRepository(dbContext));
+        CampaignService = new CampaignService(_openAiCommunicatorService, new CampaignRepository(dbContext));
+        EncounterService = new EncounterService(_openAiCommunicatorService);
     }
 
     public IQueryable<Campaign> Campaigns => _dbContext.Campaigns
