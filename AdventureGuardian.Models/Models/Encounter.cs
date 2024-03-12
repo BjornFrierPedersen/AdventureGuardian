@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using AdventureGuardian.Models.Models.Enums;
 
 namespace AdventureGuardian.Models.Models;
@@ -17,6 +18,7 @@ public class Encounter
     /// <summary>
     /// Navigational property for the world this encounter is part of.
     /// </summary>
+    [JsonIgnore]
     public virtual Campaign Campaign { get; set; } = null!;
 
     public string Prompt(List<Character>? characters)

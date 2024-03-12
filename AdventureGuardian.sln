@@ -1,12 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian", "AdventureGuardian\AdventureGuardian.csproj", "{A95B7EB2-C9F1-4FFB-A43E-8634929A3817}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Test", "AdventureGuardian.Test\AdventureGuardian.Test.csproj", "{49A26C8C-EEEE-43C4-95B5-4209B06820A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Models", "AdventureGuardian.Models\AdventureGuardian.Models.csproj", "{36AA93A7-F4F8-446D-B8E3-1B3DB784471A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Infrastructure", "AdventureGuardian.Infrastructure\AdventureGuardian.Infrastructure.csproj", "{711777CB-E045-4700-AFA7-661910956A9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Api", "AdventureGuardian.Api\AdventureGuardian.Api.csproj", "{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AD751320-90A0-4440-A471-929BC3F91D1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSeeder", "DatabaseSeeder\DatabaseSeeder.csproj", "{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,10 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A95B7EB2-C9F1-4FFB-A43E-8634929A3817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A95B7EB2-C9F1-4FFB-A43E-8634929A3817}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A95B7EB2-C9F1-4FFB-A43E-8634929A3817}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A95B7EB2-C9F1-4FFB-A43E-8634929A3817}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49A26C8C-EEEE-43C4-95B5-4209B06820A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49A26C8C-EEEE-43C4-95B5-4209B06820A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49A26C8C-EEEE-43C4-95B5-4209B06820A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,5 +30,16 @@ Global
 		{711777CB-E045-4700-AFA7-661910956A9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{711777CB-E045-4700-AFA7-661910956A9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{711777CB-E045-4700-AFA7-661910956A9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC} = {AD751320-90A0-4440-A471-929BC3F91D1C}
 	EndGlobalSection
 EndGlobal

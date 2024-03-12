@@ -4,7 +4,7 @@ namespace AdventureGuardian.Models.Models.RaceModels;
 
 public class Dværg : Race
 {
-    public override Races RaceType => Races.Elver;
+    public override Races RaceType => Races.Dværg;
 
     public override Stats BaseRacialBonus { get; } = new()
     {

@@ -1,6 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using AdventureGuardian.Models.Models.Enums;
+using Newtonsoft.Json.Converters;
 
 namespace AdventureGuardian.Models.Models.Worlds;
 
@@ -13,6 +15,7 @@ public abstract class World
 
     [ForeignKey(nameof(Campaign))] public int CampaignId { get; set; }
 
+    [JsonIgnore]
     public virtual Campaign Campaign { get; set; } = null!;
 
     public string Prompt(int[] playersByAge, string[]? keywords)
@@ -29,9 +32,15 @@ public abstract class World
     }
 
     public abstract WorldType Type { get; }
-    [NotMapped] public abstract List<Races> Races { get; }
-    [NotMapped] public abstract List<Creatures> Creatures { get; }
-    [NotMapped] public abstract List<Classes> Classes { get; }
+    [NotMapped] 
+    [JsonPropertyName("AllowedRaces")] 
+    public abstract List<Races> Races { get; }
+    [NotMapped] 
+    [JsonPropertyName("AllowedCreatures")] 
+    public abstract List<Creatures> Creatures { get; }
+    [NotMapped] 
+    [JsonPropertyName("AllowedClasses")] 
+    public abstract List<Classes> Classes { get; }
 
     public enum WorldType
     {

@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
+using AdventureGuardian.Models.Extensions;
 using AdventureGuardian.Models.Models.ClassModels;
 using AdventureGuardian.Models.Models.Enums;
 using AdventureGuardian.Models.Models.RaceModels;
@@ -11,12 +13,34 @@ public class Character
     [Key] public int Id { get; set; }
     public required string Name { get; set; }
     public required Gender Gender { get; set; }
-    [NotMapped] public required Race Race { get; set; }
-    public Races RaceType => Race.RaceType;
-    [NotMapped] public required Class Class { get; set; }
-    public Classes ClassType => Class.ClassType;
+
+    [NotMapped]
+    public Race Race
+    {
+        // TODO: Get this as a singleton from a Races access class
+        get
+        {
+            var races = ReflectiveEnumerator.GetEnumerableOfType<Race>();
+            return races.First(race => race.RaceType.Equals(RaceType));
+        }
+    }
+
+    public Races RaceType { get; set; } = Races.Menneske;
+
+    [NotMapped]
+    public Class Class
+    {
+        // TODO: Get this as a singleton from a Classes access class
+        get
+        {
+            var classes = ReflectiveEnumerator.GetEnumerableOfType<Class>();
+            return classes.First(customClass => customClass.ClassType.Equals(ClassType));
+        }
+    }
+
+    public Classes ClassType { get; set; } = Classes.Bonde;
     public string BackgroundStory { get; set; } = string.Empty;
-    public int Level { get; set; }
+    public int Level { get; set; } = 1;
     public int BonusHitPoints { get; set; }
     [NotMapped] public int MaxHitPoints => BaseHitpoints + BonusHitPoints;
     public int HitPoints { get; set; }

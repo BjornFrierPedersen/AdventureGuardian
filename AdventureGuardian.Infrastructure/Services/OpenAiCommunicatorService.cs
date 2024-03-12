@@ -14,10 +14,9 @@ public class OpenAiCommunicatorService : IOpenAiCommunicatorService
 
     private string[] LanguageModels => new[]
     {
-        OpenAI.ObjectModels.Models.TextDavinciV3,
-        OpenAI.ObjectModels.Models.Ada,
-        OpenAI.ObjectModels.Models.Babbage,
-        OpenAI.ObjectModels.Models.Curie
+        OpenAI.ObjectModels.Models.Gpt_3_5_Turbo,
+        OpenAI.ObjectModels.Models.Gpt_3_5_Turbo_Instruct,
+        OpenAI.ObjectModels.Models.Gpt_3_5_Turbo_1106
     };
 
     private readonly OpenAIService _gpt3 = new(new OpenAiOptions()

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using AdventureGuardian.Models.Models.Enums;
 using AdventureGuardian.Models.Models.Worlds;
 
@@ -9,7 +10,7 @@ public class Campaign
 {
     [Key] public int Id { get; set; }
     public required string Name { get; set; }
-    public virtual required World World { get; set; }
+    public virtual required World World { get; init; }
     public virtual required ICollection<Character> Characters { get; set; }
     public virtual ICollection<Encounter> Encounters { get; set; } = new List<Encounter>();
 

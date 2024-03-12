@@ -4,6 +4,7 @@ using AdventureGuardian.Models.Models.ClassModels;
 using AdventureGuardian.Models.Models.Enums;
 using AdventureGuardian.Models.Models.RaceModels;
 using AdventureGuardian.Models.Models.Worlds;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdventureGuardian.Infrastructure.Services.Domain;
 
@@ -32,9 +33,7 @@ public class CampaignService
             {
                 Name = player.sex == Gender.Mand ? "Hr. Danmark" :
                     player.sex == Gender.Kvinde ? "Fru Danmark" : "Hen Danmark",
-                Gender = player.sex,
-                Race = new Menneske(),
-                Class = new Bonde()
+                Gender = player.sex
             }).ToList()
         };
 
@@ -42,6 +41,8 @@ public class CampaignService
 
         return campaign;
     }
+
+    public async Task<List<Campaign>> Campaigns(CancellationToken cancellationToken) => await _repository.Campaigns().ToListAsync(cancellationToken);
 
     public async Task<Campaign> GetCampaignAsync(int id, CancellationToken cancellationToken)
     {

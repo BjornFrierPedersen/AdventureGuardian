@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AdventureGuardian.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AdventureGuardian.Infrastructure.Migrations
 {
     [DbContext(typeof(AdventureGuardianDbContext))]
-    partial class AdventureGuardianDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240312095018_RenameSexColumnToGender")]
+    partial class RenameSexColumnToGender
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +61,6 @@ namespace AdventureGuardian.Infrastructure.Migrations
                     b.Property<int?>("CampaignId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ClassType")
-                        .HasColumnType("integer");
-
                     b.Property<int>("Gender")
                         .HasColumnType("integer");
 
@@ -73,9 +73,6 @@ namespace AdventureGuardian.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("RaceType")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

@@ -1,10 +1,9 @@
-using AdventureGuardian.Infrastructure.Persistance;
 using AdventureGuardian.Infrastructure.Services.Domain;
 using AdventureGuardian.Models.Models.ClassModels;
+using AdventureGuardian.Models.Models.Enums;
 using AdventureGuardian.Models.Models.RaceModels;
 using AdventureGuardian.Test.Database_Handling;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace AdventureGuardian.Test;
@@ -66,10 +65,8 @@ public class CharacterTests
             .WithEncounter(campaignId);
         var campaign = await _campaignService.GetCampaignAsync(campaignId, CancellationToken.None);
         var character = campaign.Characters.First();
-        var newRace = new Dværg();
-        var newClass = new Barbar();
-        character.Race = newRace;
-        character.Class = newClass;
+        character.RaceType = Races.Dværg;
+        character.ClassType = Classes.Barbar;
         
         // Act
         await _characterService.UpdateCharacterAsync(character, CancellationToken.None);
