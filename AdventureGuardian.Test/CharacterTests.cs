@@ -52,7 +52,8 @@ public class CharacterTests
         await _characterService.GenerateCharacterBackstoryAsync(character, new[] {"test"});
         await _characterService.UpdateCharacterAsync(character, CancellationToken.None);
         // Assert
-        var newBackgroundStory = testContext.Campaigns.First().Characters.First().BackgroundStory;
+        var campaignAfterUpdate = await _campaignService.GetCampaignAsync(campaignId, CancellationToken.None);
+        var newBackgroundStory = campaignAfterUpdate.Characters.First().BackgroundStory;
         newBackgroundStory.Should().NotBeSameAs(oldBackgroundStory);
     }
     
