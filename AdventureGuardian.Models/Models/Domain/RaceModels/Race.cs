@@ -1,4 +1,4 @@
-namespace AdventureGuardian.Models.Models.RaceModels;
+namespace AdventureGuardian.Models.Models.Domain.RaceModels;
 
 public abstract class Race
 {

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using AdventureGuardian.Models.Models.Enums;
 
-namespace AdventureGuardian.Models.Models;
+namespace AdventureGuardian.Models.Models.Domain;
 
 public class Encounter
 {

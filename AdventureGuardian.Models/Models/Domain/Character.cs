@@ -1,12 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
 using AdventureGuardian.Models.Extensions;
-using AdventureGuardian.Models.Models.ClassModels;
+using AdventureGuardian.Models.Models.Domain.ClassModels;
+using AdventureGuardian.Models.Models.Domain.RaceModels;
 using AdventureGuardian.Models.Models.Enums;
-using AdventureGuardian.Models.Models.RaceModels;
 
-namespace AdventureGuardian.Models.Models;
+namespace AdventureGuardian.Models.Models.Domain;
 
 public class Character
 {

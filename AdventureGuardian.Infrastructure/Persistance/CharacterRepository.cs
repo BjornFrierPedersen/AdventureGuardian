@@ -1,4 +1,5 @@
 using AdventureGuardian.Models.Models;
+using AdventureGuardian.Models.Models.Domain;
 
 namespace AdventureGuardian.Infrastructure.Persistance;
 

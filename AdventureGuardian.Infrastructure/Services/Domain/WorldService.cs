@@ -1,4 +1,4 @@
-using AdventureGuardian.Models.Models.Worlds;
+using AdventureGuardian.Models.Models.Domain.Worlds;
 
 namespace AdventureGuardian.Infrastructure.Services.Domain;
 

@@ -1,4 +1,4 @@
-namespace AdventureGuardian.Models.Models.ClassModels;
+namespace AdventureGuardian.Models.Models.Domain.ClassModels;
 
 public class Viking : Class
 {

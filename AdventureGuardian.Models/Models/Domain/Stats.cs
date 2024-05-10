@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AdventureGuardian.Models.Models;
+namespace AdventureGuardian.Models.Models.Domain;
 
 public class Stats
 {

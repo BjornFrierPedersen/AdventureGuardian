@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using AdventureGuardian.Models.Models.Domain.Worlds;
 using AdventureGuardian.Models.Models.Enums;
-using AdventureGuardian.Models.Models.Worlds;
 
-namespace AdventureGuardian.Models.Models;
+namespace AdventureGuardian.Models.Models.Domain;
 
 public class Campaign
 {

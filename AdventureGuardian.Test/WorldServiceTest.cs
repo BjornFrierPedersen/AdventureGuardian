@@ -1,5 +1,5 @@
 using AdventureGuardian.Infrastructure.Services.Domain;
-using AdventureGuardian.Models.Models.Worlds;
+using AdventureGuardian.Models.Models.Domain.Worlds;
 using AdventureGuardian.Test.Stubs;
 using FluentAssertions;
 using Xunit;

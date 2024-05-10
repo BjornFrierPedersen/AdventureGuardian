@@ -1,6 +1,6 @@
 using AdventureGuardian.Models.Models.Enums;
 
-namespace AdventureGuardian.Models.Models.RaceModels;
+namespace AdventureGuardian.Models.Models.Domain.RaceModels;
 
 public class Menneske : Race
 {

@@ -1,7 +1,7 @@
 using AdventureGuardian.Infrastructure.Services.Domain;
-using AdventureGuardian.Models.Models.ClassModels;
+using AdventureGuardian.Models.Models.Domain.ClassModels;
+using AdventureGuardian.Models.Models.Domain.RaceModels;
 using AdventureGuardian.Models.Models.Enums;
-using AdventureGuardian.Models.Models.RaceModels;
 using AdventureGuardian.Test.Database_Handling;
 using FluentAssertions;
 using Xunit;

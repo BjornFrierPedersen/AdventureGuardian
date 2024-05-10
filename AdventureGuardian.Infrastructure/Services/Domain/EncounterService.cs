@@ -1,4 +1,5 @@
 using AdventureGuardian.Models.Models;
+using AdventureGuardian.Models.Models.Domain;
 using AdventureGuardian.Models.Models.Enums;
 
 namespace AdventureGuardian.Infrastructure.Services.Domain;

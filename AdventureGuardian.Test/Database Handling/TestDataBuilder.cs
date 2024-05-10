@@ -1,8 +1,9 @@
 using AdventureGuardian.Infrastructure.Persistance;
 using AdventureGuardian.Infrastructure.Services.Domain;
 using AdventureGuardian.Models.Models;
+using AdventureGuardian.Models.Models.Domain;
+using AdventureGuardian.Models.Models.Domain.Worlds;
 using AdventureGuardian.Models.Models.Enums;
-using AdventureGuardian.Models.Models.Worlds;
 using AdventureGuardian.Test.Stubs;
 using Microsoft.EntityFrameworkCore;
 

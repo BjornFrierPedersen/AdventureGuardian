@@ -1,6 +1,6 @@
 using AdventureGuardian.Models.Models.Enums;
 
-namespace AdventureGuardian.Models.Models.Worlds;
+namespace AdventureGuardian.Models.Models.Domain.Worlds;
 
 public class SciFiWorld : World
 {

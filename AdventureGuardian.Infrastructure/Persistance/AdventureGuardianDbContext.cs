@@ -1,5 +1,6 @@
 using AdventureGuardian.Models.Models;
-using AdventureGuardian.Models.Models.Worlds;
+using AdventureGuardian.Models.Models.Domain;
+using AdventureGuardian.Models.Models.Domain.Worlds;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdventureGuardian.Infrastructure.Persistance;

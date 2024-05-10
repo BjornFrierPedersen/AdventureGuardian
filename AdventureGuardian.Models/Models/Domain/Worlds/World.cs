@@ -2,9 +2,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using AdventureGuardian.Models.Models.Enums;
-using Newtonsoft.Json.Converters;
 
-namespace AdventureGuardian.Models.Models.Worlds;
+namespace AdventureGuardian.Models.Models.Domain.Worlds;
 
 public abstract class World
 {

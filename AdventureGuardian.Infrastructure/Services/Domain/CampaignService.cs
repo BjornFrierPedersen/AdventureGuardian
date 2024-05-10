@@ -1,9 +1,8 @@
 using AdventureGuardian.Infrastructure.Persistance;
 using AdventureGuardian.Models.Models;
-using AdventureGuardian.Models.Models.ClassModels;
+using AdventureGuardian.Models.Models.Domain;
+using AdventureGuardian.Models.Models.Domain.Worlds;
 using AdventureGuardian.Models.Models.Enums;
-using AdventureGuardian.Models.Models.RaceModels;
-using AdventureGuardian.Models.Models.Worlds;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdventureGuardian.Infrastructure.Services.Domain;
