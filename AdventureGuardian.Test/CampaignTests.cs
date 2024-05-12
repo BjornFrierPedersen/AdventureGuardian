@@ -1,5 +1,6 @@
 using AdventureGuardian.Infrastructure.Persistance;
 using AdventureGuardian.Infrastructure.Services.Domain;
+using AdventureGuardian.Models.Dto;
 using AdventureGuardian.Models.Models.Domain.Worlds;
 using AdventureGuardian.Models.Models.Enums;
 using AdventureGuardian.Test.Database_Handling;
@@ -29,10 +30,10 @@ public class CampaignTests
         var campaignName = "MyTestCampaignName";
         var worldType = World.WorldType.Fantasy;
         var worldName = "Test world";
-        var playersBySexAndAge = new[] { (Gender.Kvinde, 4), (Gender.Mand, 5), (Gender.Mand, 7) };
+        var players = new List<Player> { new(Gender.Kvinde, 4), new(Gender.Mand, 5), new(Gender.Mand, 7) };
         // Act
         var campaign =
-            await _campaignService.CreateCampaignAsync(campaignName, worldName, playersBySexAndAge, worldType, false, CancellationToken.None);
+            await _campaignService.CreateCampaignAsync(new CreateCampaignDto(campaignName, worldName, players, worldType, false), CancellationToken.None);
         var newlyCreatedCampaign = await _campaignService.GetCampaignAsync(campaign.Id, CancellationToken.None);
         // Assert
         newlyCreatedCampaign.Should().NotBeNull();
@@ -45,11 +46,10 @@ public class CampaignTests
         var campaignName = "MyTestCampaignName";
         var worldType = World.WorldType.Fantasy;
         var worldName = "Test world";
-        var playersBySexAndAge = new[] { (Gender.Kvinde, 3), (Gender.Mand, 5), (Gender.Mand, 7) };
+        var players = new List<Player> { new(Gender.Kvinde, 3), new(Gender.Mand, 5), new(Gender.Mand, 7) };
         // Act
-        var invalidCampaignCreationAction = () => _campaignService.CreateCampaignAsync(campaignName, worldName,
-            playersBySexAndAge, worldType,
-            false, CancellationToken.None).Result;
+        var invalidCampaignCreationAction = () => _campaignService.CreateCampaignAsync(new CreateCampaignDto(campaignName, worldName,
+            players, worldType, false), CancellationToken.None).Result;
         // Assert
         invalidCampaignCreationAction.Should().Throw<ArgumentException>()
             .WithMessage("Players must be at least 4 years old to play this game");

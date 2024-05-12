@@ -1,7 +1,7 @@
+using System.Security.Claims;
 using AdventureGuardian.Infrastructure.Persistance;
-using AdventureGuardian.Models.Models;
+using AdventureGuardian.Models.Dto;
 using AdventureGuardian.Models.Models.Domain;
-using AdventureGuardian.Models.Models.Domain.Worlds;
 using AdventureGuardian.Models.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,28 +11,30 @@ public class CampaignService
 {
     private readonly WorldService _worldService;
     private readonly CampaignRepository _repository;
+    // TODO: Create a CurrentUserService that initializes the user and use that instead of the claimshandler
+    private readonly IClaimsHandlerService _claimsHandlerService;
 
-    public CampaignService(IOpenAiCommunicatorService openAiCommunicatorService, CampaignRepository repository)
+    public CampaignService(IOpenAiCommunicatorService openAiCommunicatorService, CampaignRepository repository, IClaimsHandlerService claimsHandlerService)
     {
         _repository = repository;
+        _claimsHandlerService = claimsHandlerService;
         _worldService = new WorldService(openAiCommunicatorService);
     }
 
-    public async Task<Campaign> CreateCampaignAsync(string campaignName, string worldName,
-        (Gender sex, int age)[] playersByAge,
-        World.WorldType worldType, bool displayExplicitContent, CancellationToken cancellationToken, string[]? keywords = null)
+    public async Task<Campaign> CreateCampaignAsync(CreateCampaignDto dto, CancellationToken cancellationToken)
     {
-        var world = await _worldService.GenerateWorldAsync(worldName, playersByAge.Select(_ => _.age).ToArray(),
-            worldType, displayExplicitContent, keywords);
+        var world = await _worldService.GenerateWorldAsync(dto.WorldName, dto.Players.Select(player => player.Age).ToArray(),
+            dto.WorldType, dto.DisplayExplicitContent, dto.WorldKeywords);
         var campaign = new Campaign
         {
-            Name = campaignName,
+            Name = dto.CampaignName,
+            UserId = _claimsHandlerService.GetClaim(ClaimTypes.NameIdentifier),
             World = world,
-            Characters = playersByAge.Select(player => new Character
+            Characters = dto.Players.Select(player => new Character
             {
-                Name = player.sex == Gender.Mand ? "Hr. Danmark" :
-                    player.sex == Gender.Kvinde ? "Fru Danmark" : "Hen Danmark",
-                Gender = player.sex
+                Name = player.Gender == Gender.Mand ? "Hr. Danmark" :
+                    player.Gender == Gender.Kvinde ? "Fru Danmark" : "Hen Danmark",
+                Gender = player.Gender
             }).ToList()
         };
 
@@ -41,7 +43,10 @@ public class CampaignService
         return campaign;
     }
 
-    public async Task<List<Campaign>> Campaigns(CancellationToken cancellationToken) => await _repository.Campaigns().ToListAsync(cancellationToken);
+    public async Task<List<Campaign>> Campaigns(CancellationToken cancellationToken)
+    {
+        return await _repository.Campaigns().ToListAsync(cancellationToken);
+    }
 
     public async Task<Campaign> GetCampaignAsync(int id, CancellationToken cancellationToken)
     {

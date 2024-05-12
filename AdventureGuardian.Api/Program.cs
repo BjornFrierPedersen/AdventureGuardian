@@ -1,4 +1,7 @@
 using AdventureGuardian.Api;
+using AdventureGuardian.Api.Extensions;
+using AdventureGuardian.Api.Startup;
+using AdventureGuardian.Infrastructure.Persistance;
 using AdventureGuardian.Models.Models.Options;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -12,7 +15,8 @@ builder.Services.AddOpenIdAuthentication(isLive: !builder.Environment.IsDevelopm
 builder.AddCustomSwaggerGen();
 
 var app = builder.Build();
-app.MapEndpoints();
+app.MapCampaignEndpoints();
+app.MapHelpEndpoints();
 app.UseSwagger();
 app.UseSwaggerUI(swaggerUiOptions =>
 {
@@ -28,4 +32,5 @@ app.UseSwaggerUI(swaggerUiOptions =>
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.ApplyMigrations<AdventureGuardianDbContext>();
 app.Run();

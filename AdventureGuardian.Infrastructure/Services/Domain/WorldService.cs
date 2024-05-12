@@ -12,7 +12,7 @@ public class WorldService
     }
 
     public async Task<World> GenerateWorldAsync(string name, int[] playersByAge, World.WorldType worldType,
-        bool displayExplicitContent, string[]? keywords = null)
+        bool displayExplicitContent, string[]? worldKeywords = null)
     {
         if (playersByAge.Any(age => age < 4))
             throw new ArgumentException("Players must be at least 4 years old to play this game");
@@ -21,7 +21,7 @@ public class WorldService
 
         var shouldDisplayExplicitContent = ShouldDisplayExplicitContent(playersByAge, displayExplicitContent);
         var world = CreateWorld(worldType, name, shouldDisplayExplicitContent);
-        return await GenerateWorldDescriptionAsync(world, playersByAge, keywords);
+        return await GenerateWorldDescriptionAsync(world, playersByAge, worldKeywords);
     }
 
     public async Task<World> GenerateWorldDescriptionAsync(World world, int[] playersByAge, string[]? keywords = null)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -7,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AdventureGuardian.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InititalCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,11 +19,38 @@ namespace AdventureGuardian.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Campaigns", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Characters",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Gender = table.Column<int>(type: "integer", nullable: false),
+                    RaceType = table.Column<int>(type: "integer", nullable: false),
+                    ClassType = table.Column<int>(type: "integer", nullable: false),
+                    BackgroundStory = table.Column<string>(type: "text", nullable: false),
+                    Level = table.Column<int>(type: "integer", nullable: false),
+                    BonusHitPoints = table.Column<int>(type: "integer", nullable: false),
+                    HitPoints = table.Column<int>(type: "integer", nullable: false),
+                    CampaignId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Characters", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Characters_Campaigns_CampaignId",
+                        column: x => x.CampaignId,
+                        principalTable: "Campaigns",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -34,6 +62,7 @@ namespace AdventureGuardian.Infrastructure.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Creatures = table.Column<int[]>(type: "integer[]", nullable: false),
+                    CharacterIds = table.Column<List<int>>(type: "integer[]", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     CampaignId = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -72,36 +101,6 @@ namespace AdventureGuardian.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Characters",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Sex = table.Column<int>(type: "integer", nullable: false),
-                    BackgroundStory = table.Column<string>(type: "text", nullable: false),
-                    Level = table.Column<int>(type: "integer", nullable: false),
-                    BonusHitPoints = table.Column<int>(type: "integer", nullable: false),
-                    HitPoints = table.Column<int>(type: "integer", nullable: false),
-                    CampaignId = table.Column<int>(type: "integer", nullable: true),
-                    EncounterId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Characters", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Characters_Campaigns_CampaignId",
-                        column: x => x.CampaignId,
-                        principalTable: "Campaigns",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Characters_Encounters_EncounterId",
-                        column: x => x.EncounterId,
-                        principalTable: "Encounters",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Stats",
                 columns: table => new
                 {
@@ -132,11 +131,6 @@ namespace AdventureGuardian.Infrastructure.Migrations
                 column: "CampaignId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Characters_EncounterId",
-                table: "Characters",
-                column: "EncounterId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Encounters_CampaignId",
                 table: "Encounters",
                 column: "CampaignId");
@@ -158,6 +152,9 @@ namespace AdventureGuardian.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Encounters");
+
+            migrationBuilder.DropTable(
                 name: "Stats");
 
             migrationBuilder.DropTable(
@@ -165,9 +162,6 @@ namespace AdventureGuardian.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Characters");
-
-            migrationBuilder.DropTable(
-                name: "Encounters");
 
             migrationBuilder.DropTable(
                 name: "Campaigns");

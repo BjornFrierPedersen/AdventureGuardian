@@ -8,6 +8,7 @@ namespace AdventureGuardian.Models.Models.Domain;
 public class Campaign
 {
     [Key] public int Id { get; set; }
+    public required string UserId { get; set; }
     public required string Name { get; set; }
     public virtual required World World { get; init; }
     public virtual required ICollection<Character> Characters { get; set; }

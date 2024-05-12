@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using AdventureGuardian.Infrastructure.Services;
 using AdventureGuardian.Models.Models;
 using AdventureGuardian.Models.Models.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -7,10 +9,12 @@ namespace AdventureGuardian.Infrastructure.Persistance;
 public class CampaignRepository
 {
     private readonly AdventureGuardianDbContext _dbContext;
+    private readonly IClaimsHandlerService _claimsHandlerService;
 
-    public CampaignRepository(AdventureGuardianDbContext dbContext)
+    public CampaignRepository(AdventureGuardianDbContext dbContext, IClaimsHandlerService claimsHandlerService)
     {
         _dbContext = dbContext;
+        _claimsHandlerService = claimsHandlerService;
     }
 
     public IQueryable<Campaign> Campaigns()
@@ -18,7 +22,8 @@ public class CampaignRepository
         return _dbContext.Campaigns
             .Include(campaign => campaign.World)
             .Include(campaign => campaign.Encounters)
-            .Include(campaign => campaign.Characters);
+            .Include(campaign => campaign.Characters)
+            .Where(campaign => campaign.UserId == _claimsHandlerService.GetClaim(ClaimTypes.NameIdentifier));
     }
 
     public async Task CreateCampaignAsync(Campaign campaign, CancellationToken cancellationToken)

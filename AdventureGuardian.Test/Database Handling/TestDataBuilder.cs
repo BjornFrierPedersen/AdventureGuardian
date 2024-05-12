@@ -1,11 +1,15 @@
+using System.Security.Claims;
 using AdventureGuardian.Infrastructure.Persistance;
+using AdventureGuardian.Infrastructure.Services;
 using AdventureGuardian.Infrastructure.Services.Domain;
-using AdventureGuardian.Models.Models;
+using AdventureGuardian.Models.Dto;
 using AdventureGuardian.Models.Models.Domain;
 using AdventureGuardian.Models.Models.Domain.Worlds;
 using AdventureGuardian.Models.Models.Enums;
 using AdventureGuardian.Test.Stubs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace AdventureGuardian.Test.Database_Handling;
 
@@ -22,8 +26,13 @@ public class TestDataBuilder
     {
         _dbContext = dbContext;
         _repository = new Repository(dbContext);
+        var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
+        httpContextAccessorMock.Setup(m => m.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier))
+            .Returns(new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()));
         CharacterService = new CharacterService(_openAiCommunicatorService, new CharacterRepository(dbContext));
-        CampaignService = new CampaignService(_openAiCommunicatorService, new CampaignRepository(dbContext));
+        CampaignService = new CampaignService(_openAiCommunicatorService,
+            new CampaignRepository(dbContext, new ClaimsHandlerService(httpContextAccessorMock.Object)),
+            new ClaimsHandlerService(httpContextAccessorMock.Object));
         EncounterService = new EncounterService(_openAiCommunicatorService);
     }
 
@@ -45,13 +54,12 @@ public class TestDataBuilder
             .Build();
     }
 
-
-    public TestDataBuilder WithCampaign(out int campaignId, (Gender gender, int age)[]? playersByGenderAndAge = null)
+    public TestDataBuilder WithCampaign(out int campaignId, IEnumerable<Player>? players = null)
     {
-        campaignId = CampaignService.CreateCampaignAsync("MyTestCampaignName", "Test world",
-                playersByGenderAndAge ?? new[] { (Gender.Kvinde, 4), (Gender.Mand, 5), (Gender.Mand, 7) },
-                World.WorldType.Fantasy,
-                false, CancellationToken.None).Result.Id;
+        var createCampaignDto = new CreateCampaignDto("MyTestCampaignName", "Test world",
+            players ?? new List<Player> { new(Gender.Kvinde, 4), new(Gender.Mand, 5), new(Gender.Mand, 7) },
+            World.WorldType.Fantasy, false);
+        campaignId = CampaignService.CreateCampaignAsync(createCampaignDto, CancellationToken.None).Result.Id;
         return this;
     }
 

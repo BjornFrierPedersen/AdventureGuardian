@@ -23,7 +23,7 @@ namespace AdventureGuardian.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Campaign", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Campaign", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,12 +35,16 @@ namespace AdventureGuardian.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("Campaigns");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Character", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Character", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +88,7 @@ namespace AdventureGuardian.Infrastructure.Migrations
                     b.ToTable("Characters");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Encounter", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Encounter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -121,7 +125,7 @@ namespace AdventureGuardian.Infrastructure.Migrations
                     b.ToTable("Encounters");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Stats", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Stats", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -158,7 +162,7 @@ namespace AdventureGuardian.Infrastructure.Migrations
                     b.ToTable("Stats");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Worlds.World", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Worlds.World", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -196,37 +200,37 @@ namespace AdventureGuardian.Infrastructure.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Worlds.FantasyWorld", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Worlds.FantasyWorld", b =>
                 {
-                    b.HasBaseType("AdventureGuardian.Models.Models.Worlds.World");
+                    b.HasBaseType("AdventureGuardian.Models.Models.Domain.Worlds.World");
 
                     b.HasDiscriminator().HasValue("FantasyWorld");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Worlds.RealismWorld", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Worlds.RealismWorld", b =>
                 {
-                    b.HasBaseType("AdventureGuardian.Models.Models.Worlds.World");
+                    b.HasBaseType("AdventureGuardian.Models.Models.Domain.Worlds.World");
 
                     b.HasDiscriminator().HasValue("RealismWorld");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Worlds.SciFiWorld", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Worlds.SciFiWorld", b =>
                 {
-                    b.HasBaseType("AdventureGuardian.Models.Models.Worlds.World");
+                    b.HasBaseType("AdventureGuardian.Models.Models.Domain.Worlds.World");
 
                     b.HasDiscriminator().HasValue("SciFiWorld");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Character", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Character", b =>
                 {
-                    b.HasOne("AdventureGuardian.Models.Models.Campaign", null)
+                    b.HasOne("AdventureGuardian.Models.Models.Domain.Campaign", null)
                         .WithMany("Characters")
                         .HasForeignKey("CampaignId");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Encounter", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Encounter", b =>
                 {
-                    b.HasOne("AdventureGuardian.Models.Models.Campaign", "Campaign")
+                    b.HasOne("AdventureGuardian.Models.Models.Domain.Campaign", "Campaign")
                         .WithMany("Encounters")
                         .HasForeignKey("CampaignId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -235,27 +239,27 @@ namespace AdventureGuardian.Infrastructure.Migrations
                     b.Navigation("Campaign");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Stats", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Stats", b =>
                 {
-                    b.HasOne("AdventureGuardian.Models.Models.Character", null)
+                    b.HasOne("AdventureGuardian.Models.Models.Domain.Character", null)
                         .WithOne("BonusStats")
-                        .HasForeignKey("AdventureGuardian.Models.Models.Stats", "CharacterId")
+                        .HasForeignKey("AdventureGuardian.Models.Models.Domain.Stats", "CharacterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Worlds.World", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Worlds.World", b =>
                 {
-                    b.HasOne("AdventureGuardian.Models.Models.Campaign", "Campaign")
+                    b.HasOne("AdventureGuardian.Models.Models.Domain.Campaign", "Campaign")
                         .WithOne("World")
-                        .HasForeignKey("AdventureGuardian.Models.Models.Worlds.World", "CampaignId")
+                        .HasForeignKey("AdventureGuardian.Models.Models.Domain.Worlds.World", "CampaignId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Campaign");
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Campaign", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Campaign", b =>
                 {
                     b.Navigation("Characters");
 
@@ -265,7 +269,7 @@ namespace AdventureGuardian.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AdventureGuardian.Models.Models.Character", b =>
+            modelBuilder.Entity("AdventureGuardian.Models.Models.Domain.Character", b =>
                 {
                     b.Navigation("BonusStats")
                         .IsRequired();
