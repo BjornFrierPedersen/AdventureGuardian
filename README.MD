@@ -8,12 +8,12 @@ Running the application with locally hosted postgres and keycloak in docker
 6. Click on create realm
 7. Drag and drop the file .\infrastructure-configuration\keycloak-realm-export.json into the resource file textbox
 8. Go to Users
-	8.1. Click on the 'Add user' button
-	8.2. Input the required fields and click on next
-	8.3. Click on the 'Role mapping' banner 
-	8.4. Click on the 'Assign role' button and select the 'adventureguardian' role, which is the base role
-	8.5. Click on the "Credentials" banner and click the 'Set password' button
-	8.6. Input password and set Temporary to 'Off'
+	1. Click on the 'Add user' button
+	2. Input the required fields and click on next
+	3. Click on the 'Role mapping' banner 
+	4. Click on the 'Assign role' button and select the 'adventureguardian' role, which is the base role
+	5. Click on the "Credentials" banner and click the 'Set password' button
+	6. Input password and set Temporary to 'Off'
 9. Start the AdventureGuardian application
 10. Goto url: http://localhost:5058/swagger/index.html
 11. Click on Get '/help/token/get and input username and password you just created
