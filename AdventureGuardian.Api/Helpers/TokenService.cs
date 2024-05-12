@@ -19,7 +19,7 @@ public class TokenService
         {
             new KeyValuePair<string, string>("grant_type", "password"),
             new KeyValuePair<string, string>("client_id", "adventureguardian"),
-            new KeyValuePair<string, string>("client_secret", "PZlbVN5O3Lr0FEWE1Mo8fmcwdw1z5DAu"),
+            new KeyValuePair<string, string>("client_secret", "**********"),
             new KeyValuePair<string, string>("username", username),
             new KeyValuePair<string, string>("password", password)
         });

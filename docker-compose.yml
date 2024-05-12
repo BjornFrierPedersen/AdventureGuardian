@@ -1,24 +1,63 @@
 version: '3.8'
 
 services:
+  # postgres:
+  #   image: postgres:13.2
+  #   environment:
+  #     POSTGRES_DB: ${POSTGRESQL_DB}
+  #     POSTGRES_USER: ${POSTGRESQL_USER}
+  #     POSTGRES_PASSWORD: ${POSTGRESQL_PASS}
+  #   networks:
+  #     - local-keycloak
   postgres:
-    container_name: postgres_container
     image: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${POSTGRESQL_DB}
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASS}
       PGDATA: /data/postgres
     volumes:
        - postgres:/data/postgres
     ports:
       - "5436:5432"
     networks:
-      - postgres
+      - adventureguardian
     restart: unless-stopped  
-  
+      
+  # admin username: user
+  # admin password: bitnami
+  # user login: http://localhost:28080/realms/adventureguardian/account
+  keycloak:
+    depends_on:
+      - postgres
+    container_name: keycloak
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_DATABASE: ${POSTGRESQL_DB}
+      DB_USER: ${POSTGRESQL_USER}
+      DB_PASSWORD: ${POSTGRESQL_PASS}
+    volumes:
+      - keycloak:/opt/jboss/keycloak/standalone/data/
+    image: bitnami/keycloak:latest
+    ports:
+      - "28080:8080"
+    networks:
+      - adventureguardian
+
 networks:
-  postgres:
-    driver: bridge
+  adventureguardian:
 
 volumes:
-    postgres:
+  postgres:
+  keycloak:
+
+  # Generate access token with curl command
+  # curl -X POST \
+  # "http://localhost:28080//realms/adventureguardian/protocol/openid-connect/token" \
+  # -H "Content-Type: application/x-www-form-urlencoded" \
+  # -d "grant_type=password" \
+  # -d "client_id=adventureguardian" \
+  # -d "client_secret=PZlbVN5O3Lr0FEWE1Mo8fmcwdw1z5DAu" \
+  # -d "username=user" \
+  # -d "password=bitnami"
