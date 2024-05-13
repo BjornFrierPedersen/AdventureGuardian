@@ -46,7 +46,8 @@ public class CampaignRepository
 
     public async Task<Campaign> GetCampaignByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var campaign = await _dbContext.Campaigns.FirstOrDefaultAsync(campaign => campaign.Id.Equals(id), cancellationToken: cancellationToken);
+        var campaign = await Campaigns()
+            .FirstOrDefaultAsync(campaign => campaign.Id.Equals(id), cancellationToken: cancellationToken);
         if (campaign is null) throw new ApplicationException("Campaign not found");
         return campaign;
     }

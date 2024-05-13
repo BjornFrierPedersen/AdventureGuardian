@@ -33,7 +33,9 @@ public class TestDataBuilder
         CampaignService = new CampaignService(_openAiCommunicatorService,
             new CampaignRepository(dbContext, new ClaimsHandlerService(httpContextAccessorMock.Object)),
             new ClaimsHandlerService(httpContextAccessorMock.Object));
-        EncounterService = new EncounterService(_openAiCommunicatorService);
+        EncounterService = new EncounterService(_openAiCommunicatorService,
+            new CampaignRepository(dbContext, new ClaimsHandlerService(httpContextAccessorMock.Object)),
+            new CharacterRepository(dbContext));
     }
 
     public IQueryable<Campaign> Campaigns => _dbContext.Campaigns

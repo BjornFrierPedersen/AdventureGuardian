@@ -37,7 +37,11 @@ public static partial class Startup
         services.AddAuthorization(options =>
         {
             options.AddPolicy(KnownPolicies.UserId, policy => policy.RequireClaim(ClaimTypes.NameIdentifier));
+            // Roles policies
             options.AddPolicy(KnownPolicies.BaseRole, policy => policy.RequireRole(Roles.AdventureGuardian));
+            options.AddPolicy(KnownPolicies.WyrmlingRole, policy => policy.RequireRole(Roles.AdventureGuardianWyrmling));
+            options.AddPolicy(KnownPolicies.DrakeRole, policy => policy.RequireRole(Roles.AdventureGuardianDrake));
+            options.AddPolicy(KnownPolicies.DragonRole, policy => policy.RequireRole(Roles.AdventureGuardianDragon));
         });
     }
 }

@@ -12,9 +12,18 @@ public static partial class Startup
     public static void MapCampaignEndpoints(this WebApplication app)
     {
         app.MapGet("/campaign/get", async (CampaignService campaignService, CancellationToken cancellationToken) 
-            => await campaignService.Campaigns(cancellationToken)).WithDefaultAuthorization();
+            => await campaignService.Campaigns(cancellationToken))
+            .WithDefaultAuthorization();
+        
         app.MapPost("/campaign/create", async ([FromBody]CreateCampaignDto createCampaignDto, CampaignService campaignService, CancellationToken cancellationToken) 
-            => await campaignService.CreateCampaignAsync(createCampaignDto, cancellationToken)).WithDefaultAuthorization();
+            => await campaignService.CreateCampaignAsync(createCampaignDto, cancellationToken))
+            .WithDefaultAuthorization();
+        
+        app.MapPost("/campaign/encounter/create", async ([FromBody]CreateEncounterDto createEncounterDto, EncounterService encounterService, CancellationToken cancellationToken) 
+            => await encounterService.CreateEncounterAsync(createEncounterDto, cancellationToken))
+            .WithDefaultAuthorization()
+            .RequireAuthorization(KnownPolicies.WyrmlingRole);
+        
     }
     
     public static void MapHelpEndpoints(this WebApplication app)
@@ -25,8 +34,9 @@ public static partial class Startup
                 await tokenService.GetDevelopmentToken(username, password, cancellationToken));
     }
     
-    private static void WithDefaultAuthorization(this RouteHandlerBuilder routeHandlerBuilder)
+    private static RouteHandlerBuilder WithDefaultAuthorization(this RouteHandlerBuilder routeHandlerBuilder)
     {
         routeHandlerBuilder.RequireAuthorization(KnownPolicies.UserId, KnownPolicies.BaseRole);
+        return routeHandlerBuilder;
     }
 }

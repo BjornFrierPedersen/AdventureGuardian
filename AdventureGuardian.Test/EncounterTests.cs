@@ -1,4 +1,5 @@
 using AdventureGuardian.Infrastructure.Services.Domain;
+using AdventureGuardian.Models.Dto;
 using AdventureGuardian.Test.Database_Handling;
 using FluentAssertions;
 using Xunit;
@@ -24,10 +25,10 @@ public class EncounterTests
         var context = _builder
             .WithCampaign(out var campaignId)
             .WithEncounter(campaignId);
-        var campaign = context.Campaigns.First(campaign => campaign.Id.Equals(campaignId));
+        var createEncounterDto = new CreateEncounterDto(campaignId, "test_encounter");
         
         // Act
-        await _encounterService.GenerateEncounterAsync("test_encounter", campaign);
+        await _encounterService.CreateEncounterAsync(createEncounterDto, CancellationToken.None);
         var newEncounter = context.Campaigns.First(c => c.Id.Equals(campaignId)).Encounters.Last();
         
         // Assert

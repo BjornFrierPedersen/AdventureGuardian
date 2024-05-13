@@ -20,12 +20,14 @@ public class Campaign
     [NotMapped]
     public Ruleset Ruleset { get; set; }
 
-    public Encounter CreateEncounter(string name, Creatures[]? creatures = null)
+    public Encounter CreateEncounter(string name, List<int>? characterIds = null, Creatures[]? creatures = null)
     {
         var encounter = new Encounter
         {
             Name = name,
-            CharacterIds = Characters.Select(character => character.Id).ToList(),
+            CharacterIds = characterIds != null && characterIds.Any() ? 
+                Characters.Select(character => character.Id).Where(characterIds.Contains).ToList() :
+                Characters.Select(character => character.Id).ToList(),
             Creatures = creatures?.ToList() ?? World.Creatures.OrderBy(_ => Guid.NewGuid()).Take(2).ToList(),
             CampaignId = Id,
             Campaign = this
