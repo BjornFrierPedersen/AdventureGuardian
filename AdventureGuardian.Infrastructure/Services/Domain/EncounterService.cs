@@ -17,7 +17,7 @@ public class EncounterService : BaseAiGenerationService
     public async Task<Encounter> CreateEncounterAsync(CreateEncounterDto createEncounterDto, CancellationToken cancellationToken)
     {
         var campaign = await _campaignRepository.GetCampaignByIdAsync(createEncounterDto.CampaignId, cancellationToken);
-        var encounter = campaign.CreateEncounter(createEncounterDto.Name, createEncounterDto.Creatures);
+        var encounter = campaign.CreateEncounter(createEncounterDto.Name, createEncounterDto.CharacterIds, createEncounterDto.Creatures);
         await GenerateEncounterDescriptionAsync(encounter, cancellationToken, createEncounterDto.CharacterIds);
         campaign.Encounters.Add(encounter);
         return encounter;
