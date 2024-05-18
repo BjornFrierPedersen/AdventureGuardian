@@ -5,7 +5,7 @@ Running the application with locally hosted postgres and keycloak in docker
 3. Run the command: docker-compose up -d
 4. Go to url: http://localhost:28080/admin/master/console/
 5. Click on the dropdown box in the far left corner labeled keycloak
-6. Click on create realm
+6. Click on 'create realm'
 7. Drag and drop the file .\infrastructure-configuration\keycloak-realm-export.json into the resource file textbox
 8. Go to Users
 	1. Click on the 'Add user' button

@@ -2,7 +2,10 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=035d73f3_002D1647_002D4dd7_002D9d19_002D820e35fd4baa/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6dfacc97_002Da6a0_002D4baa_002D85b9_002D7c41f0844658/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Generating_world_for_group_consisting_of_individuals_in_same_age_group_should_filter_out_explicit_content" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6dfacc97_002Da6a0_002D4baa_002D85b9_002D7c41f0844658/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Generating_world_for_group_consisting_of_individuals_in_same_age_group_should_filter_out_explicit_content" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e04c8d7a_002D559d_002D4d9f_002D9bbc_002Db65a41e93c2b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>
