@@ -1,30 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Test", "AdventureGuardianSrc\AdventureGuardian.Test\AdventureGuardian.Test.csproj", "{49A26C8C-EEEE-43C4-95B5-4209B06820A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Test", "AdventureGuardian\AdventureGuardian.Test\AdventureGuardian.Test.csproj", "{49A26C8C-EEEE-43C4-95B5-4209B06820A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Models", "AdventureGuardianSrc\AdventureGuardian.Models\AdventureGuardian.Models.csproj", "{36AA93A7-F4F8-446D-B8E3-1B3DB784471A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Models", "AdventureGuardian\AdventureGuardian.Models\AdventureGuardian.Models.csproj", "{36AA93A7-F4F8-446D-B8E3-1B3DB784471A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Infrastructure", "AdventureGuardianSrc\AdventureGuardian.Infrastructure\AdventureGuardian.Infrastructure.csproj", "{711777CB-E045-4700-AFA7-661910956A9F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Api", "AdventureGuardianSrc\AdventureGuardian.Api\AdventureGuardian.Api.csproj", "{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Infrastructure", "AdventureGuardian\AdventureGuardian.Infrastructure\AdventureGuardian.Infrastructure.csproj", "{711777CB-E045-4700-AFA7-661910956A9F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AD751320-90A0-4440-A471-929BC3F91D1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSeeder", "DatabaseSeeder\DatabaseSeeder.csproj", "{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSeeder", "Tools\DatabaseSeeder\DatabaseSeeder.csproj", "{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalCommunicator", "ExternalCommunicatorSrc\ExternalCommunicator\ExternalCommunicator.csproj", "{22BF0581-4FA8-4235-8739-61A6DB73F434}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalCommunicator.Service", "ExternalCommunicator\ExternalCommunicator.Service\ExternalCommunicator.Service.csproj", "{22BF0581-4FA8-4235-8739-61A6DB73F434}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageGateway", "SharedSrc\MessageGateway\MessageGateway.csproj", "{EF953F52-AA6E-4687-BCB7-EA32737478A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageGateway", "Shared\MessageGateway\MessageGateway.csproj", "{EF953F52-AA6E-4687-BCB7-EA32737478A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "SharedSrc\Shared\Shared.csproj", "{84BBD21B-6C9C-4FDD-BADE-4F13996DEE5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Shared\Configuration\Configuration.csproj", "{84BBD21B-6C9C-4FDD-BADE-4F13996DEE5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalCommunicator.Test", "ExternalCommunicatorSrc\ExternalCommunicator.Test\ExternalCommunicator.Test.csproj", "{1CAA5327-274D-4EAB-BB2B-D001F6A61228}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalCommunicator.Test", "ExternalCommunicator\ExternalCommunicator.Test\ExternalCommunicator.Test.csproj", "{1CAA5327-274D-4EAB-BB2B-D001F6A61228}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdventureGuardianSrc", "AdventureGuardianSrc", "{785A450D-E640-4135-8DEB-6D785F4D429E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdventureGuardian", "AdventureGuardian", "{785A450D-E640-4135-8DEB-6D785F4D429E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalCommunicatorSrc", "ExternalCommunicatorSrc", "{74DC5E5C-1185-4080-82CE-53127877EF1E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalCommunicator", "ExternalCommunicator", "{74DC5E5C-1185-4080-82CE-53127877EF1E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedSrc", "SharedSrc", "{08BDA8C8-7B1D-4147-85E0-8E154D6FBD6E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{08BDA8C8-7B1D-4147-85E0-8E154D6FBD6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalCommunicator.Infrastructure", "ExternalCommunicator\ExternalCommunicator.Infrastructure\ExternalCommunicator.Infrastructure.csproj", "{7EC81F61-6A88-4139-A11E-3FE93E18F3B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGuardian.Api", "AdventureGuardian\AdventureGuardian.Api\AdventureGuardian.Api.csproj", "{DDB7C12C-8A62-49C8-9199-1FBC33379F93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebConfiguration", "Shared\WebConfiguration\WebConfiguration.csproj", "{745AFB3C-7EF3-4D0A-9E85-CBD007B70A42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,10 +48,6 @@ Global
 		{711777CB-E045-4700-AFA7-661910956A9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{711777CB-E045-4700-AFA7-661910956A9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{711777CB-E045-4700-AFA7-661910956A9F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{263D61FA-42FF-41AF-821F-CA38E5D1ECDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,10 +68,21 @@ Global
 		{1CAA5327-274D-4EAB-BB2B-D001F6A61228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CAA5327-274D-4EAB-BB2B-D001F6A61228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CAA5327-274D-4EAB-BB2B-D001F6A61228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EC81F61-6A88-4139-A11E-3FE93E18F3B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EC81F61-6A88-4139-A11E-3FE93E18F3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EC81F61-6A88-4139-A11E-3FE93E18F3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EC81F61-6A88-4139-A11E-3FE93E18F3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB7C12C-8A62-49C8-9199-1FBC33379F93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB7C12C-8A62-49C8-9199-1FBC33379F93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB7C12C-8A62-49C8-9199-1FBC33379F93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB7C12C-8A62-49C8-9199-1FBC33379F93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{745AFB3C-7EF3-4D0A-9E85-CBD007B70A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{745AFB3C-7EF3-4D0A-9E85-CBD007B70A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{745AFB3C-7EF3-4D0A-9E85-CBD007B70A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{745AFB3C-7EF3-4D0A-9E85-CBD007B70A42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{38CEFB4C-12BE-413E-A43B-BC59E8DFD9EC} = {AD751320-90A0-4440-A471-929BC3F91D1C}
-		{263D61FA-42FF-41AF-821F-CA38E5D1ECDC} = {785A450D-E640-4135-8DEB-6D785F4D429E}
 		{711777CB-E045-4700-AFA7-661910956A9F} = {785A450D-E640-4135-8DEB-6D785F4D429E}
 		{36AA93A7-F4F8-446D-B8E3-1B3DB784471A} = {785A450D-E640-4135-8DEB-6D785F4D429E}
 		{49A26C8C-EEEE-43C4-95B5-4209B06820A3} = {785A450D-E640-4135-8DEB-6D785F4D429E}
@@ -79,5 +90,8 @@ Global
 		{1CAA5327-274D-4EAB-BB2B-D001F6A61228} = {74DC5E5C-1185-4080-82CE-53127877EF1E}
 		{EF953F52-AA6E-4687-BCB7-EA32737478A3} = {08BDA8C8-7B1D-4147-85E0-8E154D6FBD6E}
 		{84BBD21B-6C9C-4FDD-BADE-4F13996DEE5E} = {08BDA8C8-7B1D-4147-85E0-8E154D6FBD6E}
+		{7EC81F61-6A88-4139-A11E-3FE93E18F3B4} = {74DC5E5C-1185-4080-82CE-53127877EF1E}
+		{DDB7C12C-8A62-49C8-9199-1FBC33379F93} = {785A450D-E640-4135-8DEB-6D785F4D429E}
+		{745AFB3C-7EF3-4D0A-9E85-CBD007B70A42} = {08BDA8C8-7B1D-4147-85E0-8E154D6FBD6E}
 	EndGlobalSection
 EndGlobal
