@@ -3,7 +3,6 @@ using AdventureGuardian.Infrastructure.Services.Domain;
 using MessageGateway;
 using MessageGateway.Events;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -11,32 +10,15 @@ using Shared.Enums;
 
 namespace AdventureGuardian.Infrastructure;
 
-public class ResponseConsumer : ConsumerBase, IHostedService
+public class ResponseConsumer : ConsumerBase
 {
-    protected override string OpenAiQueueAndExchangeRoutingKey => KnownProperties.RoutingKeyResponse;
+    protected override string QueueName => KnownProperties.OpenAiResponseQueue;
+    protected override string QueueRoutingKey => KnownProperties.RoutingKeyResponse;
     private readonly IServiceProvider _serviceProvider;
     
     public ResponseConsumer(ConnectionFactory connectionFactory, IServiceProvider serviceProvider) : base(connectionFactory)
     {
         _serviceProvider = serviceProvider;
-        try
-        {
-            var consumer = new AsyncEventingBasicConsumer(Channel);
-            consumer.Received += OnEventReceived<Event>;
-            Channel.BasicConsume(queue: KnownProperties.OpenAiQueue, autoAck: false, consumer: consumer);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error while consuming message: {ex}");
-        }
-    }
-    
-    public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        Dispose();
-        return Task.CompletedTask;
     }
 
     protected override async Task OnEventReceived<T>(object sender, BasicDeliverEventArgs @event)
@@ -46,7 +28,7 @@ public class ResponseConsumer : ConsumerBase, IHostedService
             using var scope = _serviceProvider.CreateScope();
             {
                 var cancellationTokenSource = new CancellationTokenSource();
-                cancellationTokenSource.CancelAfter(300000);
+                cancellationTokenSource.CancelAfter(5000);
                 var cancellationToken = cancellationTokenSource.Token;
                 
                 var characterService = scope.ServiceProvider.GetRequiredService<CharacterService>();
@@ -60,7 +42,7 @@ public class ResponseConsumer : ConsumerBase, IHostedService
                 switch (responseEvent.EntityType)
                 {
                     case EntityType.Character:
-                        var character = await characterService.GetByIdAsync(responseEvent.ExternalId, cancellationToken);
+                        var character = await characterService.GetByIdAsync(responseEvent.EntityId, cancellationToken);
                         character.BackgroundStory = responseEvent.Message;
                         await characterService.UpdateAsync(character, cancellationToken);
                         break;
@@ -70,19 +52,22 @@ public class ResponseConsumer : ConsumerBase, IHostedService
                         await encounterService.UpdateAsync(encounter, cancellationToken);
                         break;
                     case EntityType.World:
-                        var world = await worldService.GetByIdAsync(responseEvent.ExternalId, cancellationToken);
+                        var world = await worldService.GetByIdAsync(responseEvent.EntityId, cancellationToken);
                         world.Description = responseEvent.Message;
                         await worldService.UpdateAsync(world, cancellationToken);
                         break;
                     default:
                         throw new ArgumentException($"Unknown entity type: {responseEvent.EntityType}");
                 }
-                Channel.BasicAck(@event.DeliveryTag, false);
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error while retrieving message from queue.\n{ex}");
+        }
+        finally
+        {
+            Channel.BasicAck(@event.DeliveryTag, false);
         }
     }
 }

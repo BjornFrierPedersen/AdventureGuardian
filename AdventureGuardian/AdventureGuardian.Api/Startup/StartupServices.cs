@@ -35,6 +35,7 @@ public static partial class Startup
         builder.Services.AddTransient<CampaignRepository>();
         builder.Services.AddTransient<CharacterRepository>();
         builder.Services.AddTransient<WorldRepository>();
+        builder.Services.AddTransient<EventRepository>();
         // Services
         builder.Services.AddTransient<IClaimsHandlerService, ClaimsHandlerService>();
         builder.Services.AddSingleton<TokenService>();

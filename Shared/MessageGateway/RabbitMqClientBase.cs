@@ -1,13 +1,12 @@
 using RabbitMQ.Client;
-
 namespace MessageGateway;
 
 public abstract class RabbitMqClientBase : IDisposable
 {
-    protected abstract string OpenAiQueueAndExchangeRoutingKey { get; }
     protected IModel Channel { get; private set; }
     private IConnection _connection;
     private readonly ConnectionFactory _connectionFactory;
+    protected abstract string QueueName { get; set; }
 
     protected RabbitMqClientBase(
         ConnectionFactory connectionFactory)
@@ -33,15 +32,10 @@ public abstract class RabbitMqClientBase : IDisposable
                 autoDelete: false);
                 
             Channel.QueueDeclare(
-                queue: KnownProperties.OpenAiQueue, 
+                queue: QueueName, 
                 durable: false,
                 exclusive: false, 
                 autoDelete: false);
-                
-            Channel.QueueBind(
-                queue: KnownProperties.OpenAiQueue, 
-                exchange: KnownProperties.AdventureGuardianExchange, 
-                routingKey: OpenAiQueueAndExchangeRoutingKey);
         }
     }
 
@@ -59,7 +53,7 @@ public abstract class RabbitMqClientBase : IDisposable
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Cannot dispose RabbitMQ channel or connection");
+            Console.WriteLine($"Cannot dispose RabbitMQ channel or connection: {ex}");
         }
     }
 }

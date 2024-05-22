@@ -1,15 +1,23 @@
+using ExternalCommunicator.Infrastructure.Persistance;
 using MessageGateway;
 using MessageGateway.Events;
 using RabbitMQ.Client;
 
-namespace ExternalCommunicator;
+namespace ExternalCommunicator.Infrastructure;
 
 public class ResponseProducer : ProducerBase<Event>
 {
-    public ResponseProducer(ConnectionFactory connectionFactory) : base(connectionFactory)
+    protected override string QueueName { get; set; } = KnownProperties.OpenAiResponseQueue;
+    private readonly EventRepository _eventRepository;
+    public ResponseProducer(ConnectionFactory connectionFactory, EventRepository eventRepository) : base(connectionFactory)
     {
+        _eventRepository = eventRepository;
     }
 
     protected override string RoutingKeyName => KnownProperties.RoutingKeyResponse;
-    protected override string OpenAiQueueAndExchangeRoutingKey => KnownProperties.RoutingKeyRequest;
+    
+    protected override void PersistEvent(Event @event)
+    {
+        _eventRepository.CreateEvent(@event);
+    }
 }

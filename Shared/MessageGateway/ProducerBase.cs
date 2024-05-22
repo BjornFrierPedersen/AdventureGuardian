@@ -1,4 +1,5 @@
 using System.Text;
+using MessageGateway.Events;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 
@@ -23,6 +24,7 @@ public abstract class ProducerBase<T> : RabbitMqClientBase, IRabbitMqProducer<T>
     {
         try
         {
+            PersistEvent(@event);
             var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(@event));
             var properties = Channel.CreateBasicProperties();
             properties.ContentType = "application/json";
@@ -30,9 +32,14 @@ public abstract class ProducerBase<T> : RabbitMqClientBase, IRabbitMqProducer<T>
             properties.Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
             Channel.BasicPublish(exchange: KnownProperties.AdventureGuardianExchange, routingKey: RoutingKeyName, body: body, basicProperties: properties);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Console.WriteLine("Error while publishing");
         }
+    }
+
+    protected virtual void PersistEvent(T @event)
+    {
+        // Placeholder
     }
 }

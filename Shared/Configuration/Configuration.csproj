@@ -7,8 +7,4 @@
         <RootNamespace>Shared</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
-    </ItemGroup>
-
 </Project>

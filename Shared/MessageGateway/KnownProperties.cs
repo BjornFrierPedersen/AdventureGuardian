@@ -1,13 +1,11 @@
 namespace MessageGateway;
-
 public class KnownProperties
 {
-    public static string VirtualHost => "adventureguardian";
-    public static string AdventureGuardianExchange => $"{VirtualHost}.eventexchange";
-    private static string OpenAiEvent => "openai.event";
-    public static string OpenAiQueue => $"{VirtualHost}.{OpenAiEvent}";
-    public static string RoutingKeyRequest => $"{OpenAiEvent}.request";
-    public static string RoutingKeyResponse => $"{OpenAiEvent}.response";
-    
-    
+    public const string VirtualHost = "adventureguardian";
+    public const string AdventureGuardianExchange = $"{VirtualHost}.eventexchange";
+    private const string OpenAiEvent = "openai.events";
+    public const string RoutingKeyRequest = $"{OpenAiEvent}.request";
+    public const string RoutingKeyResponse = $"{OpenAiEvent}.response";
+    public const string OpenAiRequestQueue = $"{VirtualHost}.{RoutingKeyRequest}.queue";
+    public const string OpenAiResponseQueue = $"{VirtualHost}.{RoutingKeyResponse}.queue";
 }
